@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OOP Report – ITT 06214</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #222; padding: 40px 20px; }
+    .container { max-width: 780px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); overflow: hidden; }
+    .header { background: #1565C0; color: #fff; padding: 32px 40px; }
+    .header p.course { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
+    .header h1 { font-size: 24px; font-weight: 700; }
+    .header p.sub { font-size: 14px; opacity: 0.75; margin-top: 6px; }
+    .body { padding: 36px 40px; }
+    .pillar { margin-bottom: 40px; border-radius: 6px; overflow: hidden; border: 1px solid #e0e0e0; }
+    .pillar-header { display: flex; align-items: center; gap: 14px; padding: 16px 20px; color: #fff; font-weight: 700; font-size: 16px; }
+    .pillar-number { width: 30px; height: 30px; min-width: 30px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+    .enc .pillar-header { background: #1565C0; }
+    .inh .pillar-header { background: #2e7d32; }
+    .pol .pillar-header { background: #e65100; }
+    .abs .pillar-header { background: #6a1b9a; }
+    .pillar-body { padding: 20px; }
+    .pillar-body p { font-size: 14px; line-height: 1.7; margin-bottom: 14px; color: #444; }
+    .file-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 4px; }
+    pre { background: #1e1e2e; color: #cdd6f4; padding: 16px 18px; border-radius: 6px; font-size: 13px; line-height: 1.6; overflow-x: auto; margin-bottom: 14px; font-family: 'Consolas', 'Courier New', monospace; }
+    .kw  { color: #89b4fa; }
+    .ty  { color: #89dceb; }
+    .st  { color: #a6e3a1; }
+    .cm  { color: #6c7086; font-style: italic; }
+    .nm  { color: #fab387; }
+    .mt  { color: #cba6f7; }
+    .an  { color: #f38ba8; }
+    .checklist { list-style: none; margin-top: 8px; }
+    .checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; padding: 6px 0; color: #333; line-height: 1.5; border-bottom: 1px solid #f5f5f5; }
+    .checklist li:last-child { border-bottom: none; }
+    .tick { color: #2e7d32; font-weight: 700; font-size: 16px; margin-top: 1px; }
+    .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin: 16px 0 8px; }
+    .footer { padding: 18px 40px; background: #f4f6f9; font-size: 13px; color: #888; display: flex; justify-content: space-between; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <p class="course">ITT 06214 – Mobile Application Development</p>
+    <h1>Employee Payroll System</h1>
+    <p class="sub">Demonstrating the Four Pillars of Object-Oriented Programming in Java</p>
+  </div>
+
+  <div class="body">
+
+    <!-- ENCAPSULATION -->
+    <div class="pillar enc">
+      <div class="pillar-header"><div class="pillar-number">1</div>Encapsulation</div>
+      <div class="pillar-body">
+        <p>
+          In <strong>Employee.java</strong>, the fields <code>name</code>, <code>id</code>, and
+          <code>baseSalary</code> are all <code>private</code>. No code outside the class can touch them
+          directly. They are read through getters, and <code>baseSalary</code> can only be changed through
+          <code>setBaseSalary()</code>, which rejects any negative value before allowing the change.
+        </p>
+        <div class="file-label">Employee.java</div>
+        <pre><span class="kw">private</span> <span class="ty">String</span> name;
+<span class="kw">private</span> <span class="ty">String</span> id;
+<span class="kw">private</span> <span class="ty">double</span> baseSalary;   <span class="cm">// hidden — cannot be set directly</span>
+
+<span class="kw">public</span> <span class="ty">String</span> <span class="mt">getName</span>()       { <span class="kw">return</span> name; }
+<span class="kw">public</span> <span class="ty">double</span> <span class="mt">getBaseSalary</span>() { <span class="kw">return</span> baseSalary; }
+
+<span class="kw">public void</span> <span class="mt">setBaseSalary</span>(<span class="ty">double</span> s) {
+    <span class="kw">if</span> (s &lt; <span class="nm">0</span>) <span class="kw">return</span>;   <span class="cm">// rejects negative salary</span>
+    baseSalary = s;
+}</pre>
+        <div class="section-title">Self-Check</div>
+        <ul class="checklist">
+          <li><span class="tick">✔</span> <code>baseSalary</code> is <code>private</code> — nobody can write <code>employee.baseSalary = -500</code></li>
+          <li><span class="tick">✔</span> <code>getBaseSalary()</code> is the getter</li>
+          <li><span class="tick">✔</span> <code>setBaseSalary()</code> is the controlled setter — it rejects negative values</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- INHERITANCE -->
+    <div class="pillar inh">
+      <div class="pillar-header"><div class="pillar-number">2</div>Inheritance</div>
+      <div class="pillar-body">
+        <p>
+          <strong>Manager</strong> and <strong>Cashier</strong> both <code>extend Employee</code>.
+          They automatically inherit <code>name</code>, <code>id</code>, <code>baseSalary</code>,
+          and all the getters — without rewriting any of it. Each child then adds its own extra fields
+          on top: <code>Manager</code> adds a <code>bonus</code>, and <code>Cashier</code> adds
+          <code>overtimeHours</code> and <code>overtimeRate</code>.
+        </p>
+        <div class="file-label">Manager.java</div>
+        <pre><span class="kw">class</span> <span class="ty">Manager</span> <span class="kw">extends</span> <span class="ty">Employee</span> {
+
+    <span class="kw">private double</span> bonus;
+
+    <span class="kw">public</span> <span class="mt">Manager</span>(<span class="ty">String</span> name, <span class="ty">String</span> id, <span class="ty">double</span> baseSalary, <span class="ty">double</span> bonus) {
+        <span class="kw">super</span>(name, id, baseSalary);   <span class="cm">// calls Employee's constructor</span>
+        <span class="kw">this</span>.bonus = bonus;
+    }
+    ...
+}</pre>
+        <div class="file-label">Cashier.java</div>
+        <pre><span class="kw">class</span> <span class="ty">Cashier</span> <span class="kw">extends</span> <span class="ty">Employee</span> {
+
+    <span class="kw">private int</span> overtimeHours;
+    <span class="kw">private double</span> overtimeRate;
+
+    <span class="kw">public</span> <span class="mt">Cashier</span>(<span class="ty">String</span> name, <span class="ty">String</span> id, <span class="ty">double</span> baseSalary, <span class="kw">int</span> overtimeHours, <span class="kw">double</span> overtimeRate) {
+        <span class="kw">super</span>(name, id, baseSalary);   <span class="cm">// calls Employee's constructor</span>
+        <span class="kw">this</span>.overtimeHours = overtimeHours;
+        <span class="kw">this</span>.overtimeRate  = overtimeRate;
+    }
+    ...
+}</pre>
+        <div class="section-title">Self-Check</div>
+        <ul class="checklist">
+          <li><span class="tick">✔</span> <strong>Employee</strong> is the parent class</li>
+          <li><span class="tick">✔</span> <strong>Manager</strong> is child class 1 — adds a bonus</li>
+          <li><span class="tick">✔</span> <strong>Cashier</strong> is child class 2 — adds overtime hours and rate</li>
+          <li><span class="tick">✔</span> Both use <code>super()</code> to pass shared data up to the parent constructor</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- POLYMORPHISM -->
+    <div class="pillar pol">
+      <div class="pillar-header"><div class="pillar-number">3</div>Polymorphism</div>
+      <div class="pillar-body">
+        <p>
+          Both children override <code>calculatePay()</code> using <code>@Override</code>.
+          The logic is different in each: a Manager's pay is base salary plus a fixed bonus,
+          while a Cashier's pay is base salary plus overtime hours multiplied by the overtime rate.
+          When the same <code>calculatePay()</code> call is made through an <code>Employee</code>
+          variable, Java automatically runs the correct version for the actual object.
+        </p>
+        <div class="file-label">Manager.java — base + fixed bonus</div>
+        <pre><span class="an">@Override</span>
+<span class="kw">public double</span> <span class="mt">calculatePay</span>() {
+    <span class="kw">return</span> <span class="mt">getBaseSalary</span>() + bonus;
+    <span class="cm">// e.g. 1,500,000 + 500,000 = TZS 2,000,000</span>
+}</pre>
+        <div class="file-label">Cashier.java — base + overtime</div>
+        <pre><span class="an">@Override</span>
+<span class="kw">public double</span> <span class="mt">calculatePay</span>() {
+    <span class="kw">return</span> <span class="mt">getBaseSalary</span>() + (overtimeHours * overtimeRate);
+    <span class="cm">// e.g. 800,000 + (20 × 5,000) = TZS 900,000</span>
+}</pre>
+        <div class="file-label">Main.java — same call, different result</div>
+        <pre><span class="ty">Employee</span> e1 = <span class="kw">new</span> <span class="ty">Manager</span>(<span class="st">"Julius"</span>, <span class="st">"MGR-001"</span>, <span class="nm">1500000</span>, <span class="nm">500000</span>);
+<span class="ty">Employee</span> e2 = <span class="kw">new</span> <span class="ty">Cashier</span>(<span class="st">"Asha"</span>,   <span class="st">"CSH-001"</span>, <span class="nm">800000</span>,  <span class="nm">20</span>, <span class="nm">5000</span>);
+
+e1.<span class="mt">calculatePay</span>();   <span class="cm">// → TZS 2,000,000  (Manager's version)</span>
+e2.<span class="mt">calculatePay</span>();   <span class="cm">// → TZS 900,000    (Cashier's version)</span></pre>
+        <div class="section-title">Self-Check</div>
+        <ul class="checklist">
+          <li><span class="tick">✔</span> <code>calculatePay()</code> is overridden in both child classes with <code>@Override</code></li>
+          <li><span class="tick">✔</span> Same method call produces a different result depending on the object</li>
+          <li><span class="tick">✔</span> <code>getRole()</code> is also overridden in both children</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ABSTRACTION -->
+    <div class="pillar abs">
+      <div class="pillar-header"><div class="pillar-number">4</div>Abstraction</div>
+      <div class="pillar-body">
+        <p>
+          <strong>Employee</strong> is declared <code>abstract</code>, so you cannot create a
+          plain <code>Employee</code> object — it is only a blueprint. The two abstract methods
+          <code>calculatePay()</code> and <code>getRole()</code> have no body in the parent;
+          they are just a promise that every child class must fill in its own version.
+        </p>
+        <div class="file-label">Employee.java</div>
+        <pre><span class="kw">public abstract class</span> <span class="ty">Employee</span> {
+    ...
+    <span class="kw">public abstract double</span> <span class="mt">calculatePay</span>();  <span class="cm">// no body — child must implement</span>
+    <span class="kw">public abstract</span> <span class="ty">String</span> <span class="mt">getRole</span>();       <span class="cm">// no body — child must implement</span>
+}</pre>
+        <div class="file-label">This causes a compile error — you cannot build the blueprint directly</div>
+        <pre><span class="ty">Employee</span> e = <span class="kw">new</span> <span class="ty">Employee</span>(...);   <span class="cm">// ERROR — abstract class cannot be instantiated</span>
+<span class="ty">Employee</span> e = <span class="kw">new</span> <span class="ty">Manager</span>(...);    <span class="cm">// OK — use a concrete child class instead</span></pre>
+        <div class="section-title">Self-Check</div>
+        <ul class="checklist">
+          <li><span class="tick">✔</span> <code>Employee</code> is declared <code>abstract</code></li>
+          <li><span class="tick">✔</span> <code>calculatePay()</code> and <code>getRole()</code> are abstract — no body, just a promise</li>
+          <li><span class="tick">✔</span> Both <code>Manager</code> and <code>Cashier</code> are forced to implement them</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONSOLE OUTPUT -->
+    <div class="pillar" style="border-color:#e0e0e0;">
+      <div class="pillar-header" style="background:#37474f;">
+        <div class="pillar-number">5</div>Program Output
+      </div>
+      <div class="pillar-body">
+        <p>Running <code>Main.java</code> through Programiz or the terminal produces the following output, confirming all four pillars are working.</p>
+        <div class="file-label">Terminal / Programiz output</div>
+        <pre style="color:#a6e3a1;">===== Employee Payroll System =====
+
+Manager | Julius (ID: MGR-001)
+Base Salary : TZS 1500000.0
+Total Pay   : TZS 2000000.0
+
+Cashier | Asha (ID: CSH-001)
+Base Salary : TZS 800000.0
+Total Pay   : TZS 900000.0
+
+--- Encapsulation: updating base salary via setter ---
+Set to -999: rejected. Pay still TZS 2000000.0
+Set to 1800000: accepted. Pay now TZS 2300000.0</pre>
+        <div class="section-title">What each line proves</div>
+        <ul class="checklist">
+          <li><span class="tick">✔</span> Lines 3–5 and 7–9 — <strong>Inheritance &amp; Polymorphism</strong>: both employees print via the same <code>toString()</code> but <code>calculatePay()</code> returns a different value for each</li>
+          <li><span class="tick">✔</span> Line 12 — <strong>Encapsulation</strong>: the setter rejected <code>-999</code>, balance unchanged</li>
+          <li><span class="tick">✔</span> Line 13 — <strong>Encapsulation</strong>: valid value accepted, pay updated correctly</li>
+          <li><span class="tick">✔</span> No <code>new Employee()</code> anywhere — <strong>Abstraction</strong>: only concrete child objects are created</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>ITT 06214 – Mobile Application Development</span>
+    <span>Deadline: 25 June 2026</span>
+  </div>
+
+</div>
+</body>
+</html>
